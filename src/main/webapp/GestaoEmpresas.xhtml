@@ -17,48 +17,52 @@
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Razão social: " for="razaoSocial" />
-				<h:inputText id="razaoSocial" />
+				<h:inputText id="razaoSocial"
+					value="#{gestaoEmpresasBean.empresa.razaoSocial}" />
 
 
 				<h:outputLabel value="Nome fantasia " for="nomeFantasia" />
-				<h:inputText id="nomeFantasia" />
+				<h:inputText id="nomeFantasia"
+					value="#{gestaoEmpresasBean.empresa.nomeFantasia}" />
 
 				<h:outputLabel value="Tipo empresa " for="tipoEmpresa" />
-				<h:selectOneMenu id="tipo">
+				<h:selectOneMenu id="tipo"
+					value="#{gestaoEmpresasBean.empresa.tipo}">
 					<f:selectItem itemLabel="Selecione..." />
-					<f:selectItem itemLabel="MEI" itemValue="MEI" />
-					<f:selectItem itemLabel="LTDA" itemValue="LTDA" />
+					<f:selectItems value="#{gestaoEmpresasBean.tiposEmpresa}"
+						var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}" />
 				</h:selectOneMenu>
-				
+
 				<h:outputLabel />
-				<h:commandButton value="Salvar"/>
+				<h:commandButton value="Salvar"
+					actionListener="#{gestaoEmpresasBean.salvar}" />
 			</h:panelGrid>
-			
+
 			<h:dataTable value="#{[0, 0, 0, 0]}">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Razão Social"/>
+						<h:outputText value="Razão Social" />
 					</f:facet>
-					
+
 					<h:outputText value="Softwares, Treinamentos LDTA" />
 				</h:column>
-				
+
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Nome fantasia"/>
+						<h:outputText value="Nome fantasia" />
 					</f:facet>
-					
+
 					<h:outputText value="Danki Code" />
 				</h:column>
-				
+
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Tipo Empresa"/>
+						<h:outputText value="Tipo Empresa" />
 					</f:facet>
-					
+
 					<h:outputText value="LDTA" />
 				</h:column>
-				
+
 			</h:dataTable>
 		</h:form>
 	</div>
