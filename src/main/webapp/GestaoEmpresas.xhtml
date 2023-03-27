@@ -33,9 +33,29 @@
 						var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}" />
 				</h:selectOneMenu>
 
+				<h:outputLabel value="Data Fundação " for="dataFundacao" />
+				<h:panelGroup>
+					<h:inputText id="dataFundacao"
+						value="#{gestaoEmpresasBean.empresa.dataFundacao}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:inputText>
+
+					<h:message for="dataFunfacao" value="Data Fundação" />
+				</h:panelGroup>
+
+
+				<h:outputLabel value="Faturamento" for="faturamento" />
+				<h:inputText id="faturamento"
+					value="#{gestaoEmpresasBean.empresa.faturamento}" />
+
+
 				<h:outputLabel />
+
 				<h:commandButton value="Salvar"
 					actionListener="#{gestaoEmpresasBean.salvar}" />
+
+				<h:outputLabel />
+				<h:commandLink value="Ajuda?" action="#{gestaoEmpresasBean.ajuda}" />
 			</h:panelGrid>
 
 			<h:dataTable value="#{[0, 0, 0, 0]}">

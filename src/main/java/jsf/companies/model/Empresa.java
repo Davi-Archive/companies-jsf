@@ -1,6 +1,7 @@
 package jsf.companies.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
@@ -40,19 +41,30 @@ public class Empresa implements Serializable {
     private String cnpj;
 
     @Column(name = "data_fundacao")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataFundacao;
 
     @ManyToOne
-    @JoinColumn(name = "ramo_atividade_id")
+    @JoinColumn(name = "ramo_atividade_id", nullable = false)
     private RamoAtividade ramoAtividade;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private TipoEmpresa tipo;
 
+    @Column(precision = 10, scale = 2)
+    private BigDecimal faturamento;
+
     public Long getId() {
 	return id;
+    }
+
+    public BigDecimal getFaturamento() {
+	return faturamento;
+    }
+
+    public void setFaturamento(BigDecimal faturamento) {
+	this.faturamento = faturamento;
     }
 
     public void setId(Long id) {
