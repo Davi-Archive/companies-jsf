@@ -29,7 +29,37 @@
 					<f:selectItem itemLabel="MEI" itemValue="MEI" />
 					<f:selectItem itemLabel="LTDA" itemValue="LTDA" />
 				</h:selectOneMenu>
+				
+				<h:outputLabel />
+				<h:commandButton value="Salvar"/>
 			</h:panelGrid>
+			
+			<h:dataTable value="#{[0, 0, 0, 0]}">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Razão Social"/>
+					</f:facet>
+					
+					<h:outputText value="Softwares, Treinamentos LDTA" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nome fantasia"/>
+					</f:facet>
+					
+					<h:outputText value="Danki Code" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo Empresa"/>
+					</f:facet>
+					
+					<h:outputText value="LDTA" />
+				</h:column>
+				
+			</h:dataTable>
 		</h:form>
 	</div>
 
