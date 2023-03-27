@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import jsf.companies.types.TipoEmpresa;
+import jsf.companies.model.RamoAtividade;
 
 @Entity
 @Table(name = "empresa")
@@ -29,12 +30,13 @@ public class Empresa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome_fantasia")
+    @Column(name = "nome_fantasia", nullable = false, length = 80)
     private String nomeFantasia;
 
-    @Column(name = "razao_social")
+    @Column(name = "razao_social", nullable = false, length = 120)
     private String razaoSocial;
 
+    @Column(nullable = false, length = 10)
     private String cpf;
 
     @Column(name = "data_fundacao")
@@ -46,6 +48,7 @@ public class Empresa implements Serializable {
     private RamoAtividade ramoAtividade;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
     private TipoEmpresa tipo;
 
     public Long getId() {
