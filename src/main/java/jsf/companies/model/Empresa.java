@@ -36,8 +36,8 @@ public class Empresa implements Serializable {
     @Column(name = "razao_social", nullable = false, length = 120)
     private String razaoSocial;
 
-    @Column(nullable = false, length = 10)
-    private String cpf;
+    @Column(nullable = false, length = 30)
+    private String cnpj;
 
     @Column(name = "data_fundacao")
     @Temporal(TemporalType.TIMESTAMP)
@@ -75,12 +75,20 @@ public class Empresa implements Serializable {
 	this.razaoSocial = razaoSocial;
     }
 
-    public String getCpf() {
-	return cpf;
+    public String getCnpj() {
+	return cnpj;
     }
 
-    public void setCpf(String cpf) {
-	this.cpf = cpf;
+    public void setCnpj(String cnpj) {
+	this.cnpj = cnpj;
+    }
+
+    public TipoEmpresa getTipo() {
+	return tipo;
+    }
+
+    public void setTipo(TipoEmpresa tipo) {
+	this.tipo = tipo;
     }
 
     public Date getDataFundacao() {
@@ -119,7 +127,7 @@ public class Empresa implements Serializable {
     @Override
     public String toString() {
 	return "Empresa [id=" + id + ", nomeFantasia=" + nomeFantasia
-		+ ", razaoSocial=" + razaoSocial + ", cpf=" + cpf
+		+ ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj
 		+ ", dataFundacao=" + dataFundacao
 		+ ", ramoAtividade=" + ramoAtividade + "]";
     }
