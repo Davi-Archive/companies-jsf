@@ -28,16 +28,21 @@
 
 					<i class="pi pi-bars px-2" />
 
-					<p:commandButton type="button" value="Novo" icon="pi pi-file"
-						styleClass="mr-2" style="margin: 0 10px;" />
+					<p:commandButton onclick="PF('empresaDialogWidgetVar').show();"
+						type="button" value="Nova" title="Nova" icon="pi pi-save"
+						styleClass="ui-button-help mr-2" style="margin: 0 10px;" />
 
-					<p:commandButton type="button" title="Save" icon="pi pi-save"
-						styleClass="ui-button-help mr-2" />
-					<p:commandButton type="button" title="Print" icon="pi pi-print"
-						styleClass="ui-button-warning mr-2" />
-					<p:commandButton type="button" title="Delete" icon="pi pi-trash"
-						styleClass="ui-button-danger" />
+					<p:commandButton value="Editar" type="button" title="Print"
+						icon="pi pi-file-edit" styleClass="ui-button-warning mr-2"
+						style="margin: 0 10px;" />
 
+					<p:commandButton value="Excluir" type="button" title="Delete"
+						icon="pi pi-trash" styleClass="ui-button-danger"
+						style="margin: 0 10px;" />
+
+					<p:commandButton value="Exportar para o Excel" type="button"
+						title="Exportar para o Excel" icon="pi pi-file-excel"
+						styleClass="ui-button-success" style="margin: 0 10px;" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -57,6 +62,11 @@
 					<h:outputText value="#{empresa.ramoAtividade.descricao}" />
 				</p:column>
 			</p:dataTable>
+
+			<p:dialog header="Nova Empresa" widgetVar="empresaDialogWidgetVar">
+				<p:commandButton value="Teste" />
+			</p:dialog>
+
 
 		</h:form>
 
