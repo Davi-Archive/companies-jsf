@@ -19,12 +19,14 @@
 
 
 		<h:form>
-
+			<p:growl id="messages" showDetail="true" />
 			<p:toolbar>
 				<p:toolbarGroup>
-					<p:inputText placeholder="Digite aqui um termo para pesquisa..." />
-					<p:commandButton type="button" value="Pesquisar"
-						icon="pi pi-search" />
+					<p:inputText value="#{gestaoEmpresasBean.termoPesquisa}" size="30"
+						placeholder="Digite aqui um termo para pesquisa..." />
+					<p:commandButton value="Pesquisar"
+						icon="pi pi-search" action="#{gestaoEmpresasBean.pesquisarComTermo}"
+						update="empresasDataTable" />
 
 					<i class="pi pi-bars px-2" />
 
@@ -46,9 +48,10 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}"
-				var="empresa" emptyMessage="Nenhuma informação a ser exibida"
-				paginator="true" rows="4" paginatorPosition="bottom">
+			<p:dataTable id="empresasDataTable"
+				value="#{gestaoEmpresasBean.listaEmpresas}" var="empresa"
+				emptyMessage="Nenhuma informação a ser exibida" paginator="true"
+				rows="4" paginatorPosition="bottom">
 				<p:column headerText="Razão Social" sortBy="#{empresa.razaoSocial}">
 					<h:outputText value="#{empresa.razaoSocial}" />
 				</p:column>
@@ -63,7 +66,8 @@
 				</p:column>
 			</p:dataTable>
 
-			<p:dialog header="Nova Empresa" widgetVar="empresaDialogWidgetVar">
+			<p:dialog header="Nova Empresa" modal="true" resizable="false"
+				closeOnEscape="true" widgetVar="empresaDialogWidgetVar">
 				<p:commandButton value="Teste" />
 			</p:dialog>
 
