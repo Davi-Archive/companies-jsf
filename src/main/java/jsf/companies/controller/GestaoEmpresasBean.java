@@ -12,6 +12,7 @@ import jsf.companies.model.Empresa;
 import jsf.companies.model.RamoAtividade;
 import jsf.companies.repository.Empresas;
 import jsf.companies.repository.RamoAtividades;
+import jsf.companies.service.CadastroEmpresaService;
 import jsf.companies.types.TipoEmpresa;
 import jsf.companies.util.FacesMessages;
 
@@ -29,11 +30,31 @@ public class GestaoEmpresasBean implements Serializable {
     @Inject
     private RamoAtividades ramoAtividades;
 
+    @Inject
+    private CadastroEmpresaService cadastroEmpresaService;
+
     private List<Empresa> listaEmpresas;
 
     private String termoPesquisa;
-    
+
     private Converter<Object> ramoAtividadeConverter;
+
+    private Empresa empresa;
+
+    public void prepararNovaEmpresa() {
+	empresa = new Empresa();
+    }
+
+    public void salvar() {
+	System.out.println("chamou");
+	cadastroEmpresaService.salvar(empresa);
+
+	if (jaHouvePesquisa()) {
+	    pesquisarComTermo();
+	}
+
+	messages.info("Empresa cadastrada com sucesso!");
+    }
 
     public void pesquisarComTermo() {
 	listaEmpresas = empresas.pesquisarRazaoSocial(termoPesquisa);
@@ -52,9 +73,14 @@ public class GestaoEmpresasBean implements Serializable {
 	List<RamoAtividade> listaRamoAtividades = ramoAtividades
 		.pesquisar(termo);
 
-	ramoAtividadeConverter = new RamoAtividadeConverter(listaRamoAtividades);
-	
+	ramoAtividadeConverter = new RamoAtividadeConverter(
+		listaRamoAtividades);
+
 	return listaRamoAtividades;
+    }
+
+    private boolean jaHouvePesquisa() {
+	return termoPesquisa != null && !"".equals(termoPesquisa);
     }
 
     public TipoEmpresa[] getTipoEmpresas() {
@@ -72,8 +98,12 @@ public class GestaoEmpresasBean implements Serializable {
     public void setTermoPesquisa(String termoPesquisa) {
 	this.termoPesquisa = termoPesquisa;
     }
-    
+
     public Converter<Object> getRamoAtividadeConverter() {
 	return ramoAtividadeConverter;
+    }
+
+    public Empresa getEmpresa() {
+	return empresa;
     }
 }

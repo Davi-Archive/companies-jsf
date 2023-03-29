@@ -10,7 +10,6 @@ import javax.faces.convert.Converter;
 import jsf.companies.model.RamoAtividade;
 
 //@FacesConverter(forClass = RamoAtividade.class)
-
 public class RamoAtividadeConverter implements Converter<Object> {
 
     private List<RamoAtividade> listRamoAtividades;
