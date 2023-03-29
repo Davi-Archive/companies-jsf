@@ -17,9 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 
 import jsf.companies.types.TipoEmpresa;
-import jsf.companies.model.RamoAtividade;
 
 @Entity
 @Table(name = "empresa")
@@ -31,19 +32,25 @@ public class Empresa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Column(name = "nome_fantasia", nullable = false, length = 80)
     private String nomeFantasia;
 
+    @NotBlank
     @Column(name = "razao_social", nullable = false, length = 120)
     private String razaoSocial;
 
+    @NotBlank
     @Column(nullable = false, length = 30)
     private String cnpj;
 
+    @NotBlank
+    @Past
     @Column(name = "data_fundacao")
     @Temporal(TemporalType.DATE)
     private Date dataFundacao;
 
+    @NotBlank
     @ManyToOne
     @JoinColumn(name = "ramo_atividade_id", nullable = false)
     private RamoAtividade ramoAtividade;
@@ -52,6 +59,7 @@ public class Empresa implements Serializable {
     @Column(nullable = false, length = 30)
     private TipoEmpresa tipo;
 
+    @NotBlank
     @Column(precision = 10, scale = 2)
     private BigDecimal faturamento;
 

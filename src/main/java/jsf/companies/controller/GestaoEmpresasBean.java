@@ -1,12 +1,15 @@
 package jsf.companies.controller;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.context.PrimeRequestContext;
 
 import jsf.companies.model.Empresa;
 import jsf.companies.model.RamoAtividade;
@@ -46,7 +49,7 @@ public class GestaoEmpresasBean implements Serializable {
     }
 
     public void salvar() {
-	System.out.println("chamou");
+	System.out.println("SALVAR");
 	cadastroEmpresaService.salvar(empresa);
 
 	if (jaHouvePesquisa()) {
@@ -54,6 +57,9 @@ public class GestaoEmpresasBean implements Serializable {
 	}
 
 	messages.info("Empresa cadastrada com sucesso!");
+
+	// PrimeRequestContext.getCurrentInstance()
+	// .update(Arrays.asList("frm:empresasDataTable"));
     }
 
     public void pesquisarComTermo() {
@@ -105,5 +111,13 @@ public class GestaoEmpresasBean implements Serializable {
 
     public Empresa getEmpresa() {
 	return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+	this.empresa = empresa;
+    }
+
+    public boolean isEmpresaSelecionada() {
+	return empresa != null && empresa.getId() != null;
     }
 }

@@ -18,31 +18,37 @@
 		</f:metadata>
 
 
-		<h:form>
-			<p:messages autoUpdate="true" />
+		<h:form id="frm">
+			<h:messages autoUpdate="true" for="empresasDataTable" />
 			<p:growl id="messages" showDetail="true" />
-			<p:toolbar>
+			<p:toolbar id="toolbar">
 				<p:toolbarGroup>
-					<p:inputText id="termoPesquisa" value="#{gestaoEmpresasBean.termoPesquisa}" size="30"
+					<p:inputText id="termoPesquisa"
+						value="#{gestaoEmpresasBean.termoPesquisa}" size="30"
 						placeholder="Digite aqui um termo para pesquisa..." />
 					<p:commandButton value="Pesquisar" icon="pi pi-search"
 						action="#{gestaoEmpresasBean.pesquisarComTermo}"
-						update="empresasDataTable" process="@this termoPesquisa" style="margin: 0 10px;" />
+						update="empresasDataTable" process="@this termoPesquisa"
+						style="margin: 0 10px;" />
 
 					<i class="pi pi-bars px-2" />
 
 					<p:commandButton update="empresaDialog" process="@this"
 						actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
-						oncomplete="PF('empresaDialogWidgetVar').show();" 
-						value="Nova" title="Nova" icon="pi pi-save"
-						styleClass="ui-button-help mr-2" style="margin: 0 10px;" />
+						oncomplete="PF('empresaDialogWidgetVar').show();" value="Nova"
+						title="Nova" icon="pi pi-save" styleClass="ui-button-help mr-2"
+						style="margin: 0 10px;">
+						<p:resetInput target="empresaDialog"></p:resetInput>
+					</p:commandButton>
 
-					<p:commandButton value="Editar" type="button" title="Print"
-						icon="pi pi-file-edit" styleClass="ui-button-warning mr-2"
-						style="margin: 0 10px;" />
+					<p:commandButton value="Editar"
+						disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+						title="Print" icon="pi pi-file-edit"
+						styleClass="ui-button-warning mr-2" style="margin: 0 10px;" />
 
-					<p:commandButton value="Excluir" type="button" title="Delete"
-						icon="pi pi-trash" styleClass="ui-button-danger"
+					<p:commandButton value="Excluir"
+						disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+						title="Delete" icon="pi pi-trash" styleClass="ui-button-danger"
 						style="margin: 0 10px;" />
 
 					<p:commandButton value="Exportar para o Excel" type="button"
@@ -52,9 +58,11 @@
 			</p:toolbar>
 
 			<p:dataTable id="empresasDataTable"
-				value="#{gestaoEmpresasBean.listaEmpresas}" var="empresa"
-				emptyMessage="Nenhuma informação a ser exibida" paginator="true"
-				rows="4" paginatorPosition="bottom">
+				selection="#{gestaoEmpresasBean.empresa}" selectionMode="single"
+				rowKey="#{empresa.id}" value="#{gestaoEmpresasBean.listaEmpresas}"
+				var="empresa" emptyMessage="Nenhuma informação a ser exibida"
+				paginator="true" rows="4" paginatorPosition="bottom">
+				<p:ajax event="rowSelect" update="frm:toolbar" />
 				<p:column headerText="Razão Social" sortBy="#{empresa.razaoSocial}">
 					<h:outputText value="#{empresa.razaoSocial}" />
 				</p:column>
@@ -110,8 +118,9 @@
 					<h:outputLabel />
 					<p:commandButton value="Salvar"
 						action="#{gestaoEmpresasBean.salvar}"
-						update="empresasDataTable empresasPanelGrid"
-						oncomplete="PF('empresaDialogWidgetVar').hide();" process="@this empresaDialog" />
+						update="empresasPanelGrid empresaDialog"
+						oncomplete="if (!args.validationFailed) PF('empresaDialogWidgetVar').hide();"
+						process="empresaDialog" />
 				</h:panelGrid>
 			</p:dialog>
 
