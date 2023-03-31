@@ -18,7 +18,7 @@ Este é um tutorial de como configurar e executar o projeto Controle Empresas em
 
 4. Clique em "Select root directory" e navegue até a pasta onde você baixou o projeto.
 
-5. Selecione o projeto "ControleEmpresas" e clique em "Finish".
+5. Selecione o projeto "Companies" e clique em "Finish".
 
 6. Com o projeto aberto no Eclipse, dê um duplo clique no arquivo "pom.xml" e certifique-se de que todas as dependências do projeto foram baixadas corretamente.
 
